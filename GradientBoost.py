@@ -31,11 +31,11 @@ def gradient_boost():
     model = GradientBoostingClassifier(max_depth = 3, n_estimators = 200, learning_rate = 0.01, random_state=42)
     model.fit(EDA.x_train_resampled, EDA.y_train_resampled)
 
-
-    y_pred_GBM = model.predict(EDA.x_val)
-    print(classification_report(EDA.y_val, y_pred_GBM))
-    print("AUC: ", roc_auc_score(EDA.y_val, y_pred_GBM))
-
+    
+    print('Results of Tuned Model on Validation Dataset:')
+    y_val_pred_GBM = model.predict(EDA.x_val)
+    print(classification_report(EDA.y_val, y_val_pred_GBM))
+    print("AUC: ", roc_auc_score(EDA.y_val, y_val_pred_GBM))
 
 
     # Get the predicted probabilities for the positive class (default)
@@ -79,30 +79,20 @@ def gradient_boost():
     #Why the discrepency between first AUC and graph AUC? 
     #The second method, which uses the predicted probabilities, is the standard approach for computing AUC because it provides a comprehensive 
     # view of the model's performance across all thresholds. The first method, with binary predictions, limits the AUC to a single point on the ROC curve.
+    # Thus, the first method has a lower AUC 
 
 
-    #We want to get the threshold closest to the top-left corner of the ROC graph. So we will use Eucliden distance 
-    # to find out what the threshold is. 
-    # Calculate the distance to the top-left corner for each threshold
-  #  distances = np.sqrt((0 - fpr_gbm)**2 + (1 - tpr_gbm)**2)
+    J = tpr_gbm - fpr_gbm
+    idx = np.argmax(J)
+    best_threshold = thresholds_roc_gbm[idx]
 
-    # Get the threshold for the point closest to the top-left corner
-   # optimal_threshold = thresholds_roc_gbm[np.argmin(distances)]
-  #  print(f"Optimal threshold: {optimal_threshold}")
+    print("Best threshold:", best_threshold)
+
+    print('Results of Tuned Model on Test Dataset:')
+    y_test_pred_GBM = model.predict(EDA.x_test)
+    print(classification_report(EDA.y_test, y_test_pred_GBM))
+    print("AUC: ", roc_auc_score(EDA.y_test, y_test_pred_GBM))
+
 
     
-    
-    #Change the threshold in our model to implement the optimal one: 
-   # def predict_with_threshold(probabilities, threshold):
-    #    """Return class predictions using the given threshold."""
-   #     return [1 if prob > threshold else 0 for prob in probabilities]
-
-    
-   # y_pred_optimal = predict_with_threshold(y_pred_prob_gbm, optimal_threshold)
-   # print(classification_report(EDA.y_val, y_pred_optimal))
-   # print("AUC: ", roc_auc_score(EDA.y_val, y_pred_optimal))
-
-    #^^ This did not work, so we will scrap it (comment it out)
-
-
-#gradient_boost()
+gradient_boost()

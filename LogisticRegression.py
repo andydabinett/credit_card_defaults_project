@@ -46,29 +46,22 @@ def logistic_regression():
         # we won't ultimately improve the performance of our model. 
 
 
-        y_test_predictions = model2.predict(EDA.x_test)
-
-        test_report = classification_report(EDA.y_test, y_test_predictions)
-        print(f"Test classification: \n{test_report}")
-        print("AUC: ", roc_auc_score(EDA.y_test, y_test_predictions))
-        #Performed nearly identical to validation set. 
-
         from sklearn.metrics import roc_curve, precision_recall_curve, auc
         import matplotlib.pyplot as plt
 
-        # Get the predicted probabilities for the positive class (fraud) from the logistic regres
-        y_pred_prob_lr = model2.predict_proba(EDA.x_test)[:, 1]
+        # Get the predicted probabilities for the positive class (default) 
+        y_pred_prob_lr = model2.predict_proba(EDA.x_val)[:, 1]
         # Compute the false positive rate, true positive rate, and threshold for the ROC curve
-        fpr, tpr, thresholds_roc = roc_curve(EDA.y_test, y_pred_prob_lr)
+        fpr_lr, tpr_lr, thresholds_roc_lr = roc_curve(EDA.y_val, y_pred_prob_lr)
         # Compute the precision, recall, and threshold for the Precision-Recall curve
-        precision, recall, thresholds_pr = precision_recall_curve(EDA.y_test, y_pred_prob_lr)
+        precision_lr, recall_lr, thresholds_pr_lr = precision_recall_curve(EDA.y_val, y_pred_prob_lr)
         # Compute the area under the ROC curve
-        roc_auc = auc(fpr, tpr)
+        roc_auc = auc(fpr_lr, tpr_lr)
         # Compute the area under the Precision-Recall curve
-        pr_auc = auc(recall, precision)
+        pr_auc = auc(recall_lr, precision_lr)
         # Plot the ROC curve
         plt.figure(figsize=(8, 6))
-        plt.plot(fpr, tpr, label='Logistic Regression (AUC = %0.2f)' % roc_auc)
+        plt.plot(fpr_lr, tpr_lr, label='Logistic Regression (AUC = %0.2f)' % roc_auc)
         plt.plot([0, 1], [0, 1], 'k--')
         plt.xlim([0.0, 1.0])
         plt.ylim([0.0, 1.05])
@@ -79,7 +72,7 @@ def logistic_regression():
         plt.show()
         # Plot the Precision-Recall curve
         plt.figure(figsize=(8, 6))
-        plt.plot(recall, precision, label='Logistic Regression (AUPRC = %0.2f)' % pr_auc)
+        plt.plot(recall_lr, precision_lr, label='Logistic Regression (AUPRC = %0.2f)' % pr_auc)
         plt.xlim([0.0, 1.0])
         plt.ylim([0.0, 1.05])
         plt.xlabel('Recall')
@@ -87,6 +80,21 @@ def logistic_regression():
         plt.title('Precision-Recall Curve')
         plt.legend(loc="lower left")
         plt.show()
+
+        import numpy as np 
+
+        J = tpr_lr - fpr_lr
+        idx = np.argmax(J)
+        best_threshold = thresholds_roc_lr[idx]
+
+        print("Best threshold:", best_threshold)
+
+        y_test_predictions = model2.predict(EDA.x_test)
+
+        test_report = classification_report(EDA.y_test, y_test_predictions)
+        print(f"Test classification: \n{test_report}")
+        print("AUC: ", roc_auc_score(EDA.y_test, y_test_predictions))
+        #Performed nearly identical to validation set. 
 
 
 #logistic_regression()

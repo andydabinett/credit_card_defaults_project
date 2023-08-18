@@ -159,4 +159,3 @@ from imblearn.over_sampling import SMOTE
 smote = SMOTE(random_state=42)
 x_train_resampled, y_train_resampled = smote.fit_resample(x_train, y_train)
 
-
