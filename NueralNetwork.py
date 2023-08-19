@@ -4,8 +4,8 @@ from sklearn.metrics import classification_report, roc_auc_score, roc_curve, pre
 import EDA
 from keras_tuner import RandomSearch, HyperParameters
 
-#To avoid having an over-complicated (and thus, overfitted model, we will omit hyper-parameter tuning using Keras Tuner. 
-#A multi-layer neural network 
+#To avoid having an over-complicated (and thus, overfitted) model, we will omit hyper-parameter tuning using Keras Tuner. 
+#This is a basic sequential neural network 
 
 
 def neuralnetwork():
