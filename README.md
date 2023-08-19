@@ -34,4 +34,4 @@ PAY_AMT6
 dpnm
 
 
-The code for this project was written by me with the help of GPT-3.5 to write certain functions and syntax. 
+The code for this project was written by me with the help of GPT-3.5 to write occasional expressions and syntax. 
