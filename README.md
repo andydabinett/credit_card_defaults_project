@@ -32,3 +32,6 @@ PAY_AMT4
 PAY_AMT5
 PAY_AMT6
 dpnm
+
+
+The code for this project was written by me with the help of GPT-3.5 to write certain functions and syntax. 
