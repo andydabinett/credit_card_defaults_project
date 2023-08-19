@@ -5,7 +5,7 @@ This project aims to predict how capable each client is of paying off their cred
 The dataset represents default and non-default accounts of credit card clients in Taiwan from 2005. 
 Using this historical data, I will try to build a predictive model that classifies whether an account will pay off its next month’s balance or default. 
 
-The dataset has the following attributes: 
+The dataset has the following attributes, with "dpnm" (did not pay next month) being the binary target vector - 0 for an account that did pay (non-default), and 1 for an account that did not pay (default). 
 
 ID
 LIMIT_BAL
@@ -35,3 +35,5 @@ dpnm
 
 
 The code for this project was written by me with the help of GPT-3.5 to write occasional expressions and syntax. 
+
+EDA.py and Exploratory.ipynb both contain the same code -- however, I included the EDA.py code as a Jupyter Notebook to make it easier to include all the images/results that each block of code outputs. 
