@@ -81,7 +81,7 @@ plt.show()
 # a major predictor in defaulting. Otherwise, we would see some sort of skew. 
 
 
-# %% Cell 8
+# %% Cell 9
 
 #While we will not be using these attributes to prevent a discriminative model, 
 #I still thought it might be interesting to see the distribution of defaults with respect to Sex, Education, and Marriage 
@@ -138,7 +138,7 @@ plt.show()
 
 
 
-# %% Cell 9
+# %% Cell 10
 X = features #Going to use just Balance, Age, Pay, and Bill attributes, as these show higher correlation with the target variable. 
             #Additionally, we must be aware of the fact that building a model that predicts loan default based on Sex or Education 
             #could potentially be unfairly discriminatory towards certain sex's, marriage, or education levels. 
@@ -153,7 +153,7 @@ x_temporary, x_test, y_temporary, y_test = train_test_split(X, Y, test_size = 0.
 x_train, x_val, y_train, y_val = train_test_split(x_temporary, y_temporary, test_size=0.2, random_state=42)
 
 
-# %% Cell 10
+# %% Cell 11
 #Handle the imbalanced dataset, which we noticed earlier
 from imblearn.over_sampling import SMOTE
 smote = SMOTE(random_state=42)
