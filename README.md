@@ -33,7 +33,4 @@ PAY_AMT5
 PAY_AMT6
 dpnm
 
-
-The code for this project was written by me with the help of GPT-3.5 to write occasional expressions and syntax. 
-
 EDA.py and Exploratory.ipynb both contain the same code -- however, I included the EDA.py code as a Jupyter Notebook to make it easier to include all the images/results that each block of code outputs. 
