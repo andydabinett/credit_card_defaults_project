@@ -1,7 +1,7 @@
 # credit_card_defaults_project
 
 
-This project aims to predict how capable each client is of paying off their credit card balances. 
+This project aims to predict how capable each (anonymized) individual is of paying off their credit card balances. 
 The dataset represents default and non-default accounts of credit card clients in Taiwan from 2005. 
 Using this historical data, I will try to build a predictive model that classifies whether an account will pay off its next month’s balance or default. 
 
